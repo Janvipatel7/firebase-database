@@ -7,8 +7,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ShoeList from "./pages/ShoeList";
-import AddShoe from "./pages/AddShoe";
 import EditShoe from "./pages/EditShoe";
+import { ToastContainer } from "react-toastify";
+import AddShoe from "./pages/AddShoe";
 
 
 
@@ -17,24 +18,25 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if(user){
+      if (user) {
         setIsLoggedIn(true)
-      }else{
+      } else {
         setIsLoggedIn(false)
       }
     });
     return () => unsubscribe();
   }, []);
 
-  
+
 
   return (
     <BrowserRouter>
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<PrivateRoute isLoggedIn={isLoggedIn} Component={ShoeList} />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/add" element={<PrivateRoute Component={AddShoe} isLoggedIn={isLoggedIn} />} />
         <Route path="/edit/:id" element={<PrivateRoute Component={EditShoe} isLoggedIn={isLoggedIn} />} />
       </Routes>

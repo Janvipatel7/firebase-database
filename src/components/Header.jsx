@@ -19,27 +19,22 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         <nav className="bg-[#014e4e] shadow-md">
             <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
                 <span className="text-2xl font-bold text-white tracking-wide">
-                    Shoe<span className="text-[#eaeef1]">List</span>
+                    Shoe<span className="text-[#eaeef1]">Hub</span>
                 </span>
 
                 <div className="flex items-center space-x-6">
-                    <Link
-                        to="/"
-                        className="text-white text-sm font-medium hover:text-[#eaeef1] transition"
-                    >
+                    <Link to="/" className="text-white text-sm font-medium hover:text-[#eaeef1] transition">
                         ShopList
                     </Link>
 
                     {isLoggedIn ? (
-                        <button
-                            onClick={handleLogout}
+                        <button onClick={handleLogout}
                             className="px-5 py-2 rounded-full bg-white text-[#014e4e] hover:bg-[#eaeef1] font-medium text-sm transition"
                         >
                             Logout
                         </button>
                     ) : (
-                        <button
-                            onClick={() => navigate("/login")}
+                        <button onClick={() => navigate("/login")}
                             className="px-5 py-2 rounded-full bg-white text-[#014e4e] hover:bg-[#eaeef1] font-medium text-sm transition"
                         >
                             Login
