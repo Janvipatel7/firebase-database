@@ -6,32 +6,17 @@ import { toast } from "react-toastify";
 
 const AddShoe = () => {
   const [input, setInput] = useState({ name: "", price: "", brand: "" });
-  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.id]: e.target.value });
-    setErrors({ ...errors, [e.target.id]: "" }); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let validationErrors = {};
-
-    if (input.name.trim() === "") {
-      validationErrors.name = "Please enter shoe name!";
-    }
-    if (input.price.trim() === "" || isNaN(input.price) || Number(input.price) <= 0) {
-      validationErrors.price = "Please enter a valid price!";
-    }
-    if (input.brand.trim() === "") {
-      validationErrors.brand = "Please enter brand name!";
-    }
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      toast.error("Please fix the validation errors!");
+    if (!input.name || !input.price || !input.brand) {
+      toast.error("Enter all details correctly!");
       return;
     }
 
@@ -46,10 +31,12 @@ const AddShoe = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#eaeef1]">
-      <form onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm border border-gray-200">
-        <h2 className="text-2xl font-bold text-center mb-6 text-[#014e4e]">
+    <div className="flex justify-center items-center min-h-screen bg-[#eaeef1] px-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm sm:max-w-md border border-gray-200"
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-[#014e4e]">
           Add New Shoe
         </h2>
 
@@ -57,41 +44,57 @@ const AddShoe = () => {
           <label htmlFor="name" className="block mb-2 text-sm font-medium text-[#014e4e]">
             Shoe Name
           </label>
-          <input type="text" id="name" value={input.name} onChange={handleChange}
+          <input
+            type="text"
+            id="name"
+            value={input.name}
+            onChange={handleChange}
             placeholder="Enter shoe name"
-            className="bg-[#f8f9fa] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#014e4e] focus:border-[#014e4e] block w-full p-2.5 transition duration-200"/>
-          {errors?.name && <p className="text-red-500 text-xs">{errors?.name}</p>}
+            className="w-full bg-[#f8f9fa] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#014e4e] focus:border-[#014e4e] p-2.5 transition duration-200"
+          />
         </div>
 
         <div className="mb-5">
           <label htmlFor="price" className="block mb-2 text-sm font-medium text-[#014e4e]">
             Price
           </label>
-          <input type="number" id="price" value={input.price} onChange={handleChange}
+          <input
+            type="number"
+            id="price"
+            value={input.price}
+            onChange={handleChange}
             placeholder="Enter price"
-            className="bg-[#f8f9fa] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#014e4e] focus:border-[#014e4e] block w-full p-2.5 transition duration-200"/>
-          {errors?.price && <p className="text-red-500 text-xs">{errors?.price}</p>}
+            className="w-full bg-[#f8f9fa] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#014e4e] focus:border-[#014e4e] p-2.5 transition duration-200"
+          />
         </div>
 
         <div className="mb-5">
           <label htmlFor="brand" className="block mb-2 text-sm font-medium text-[#014e4e]">
             Brand
           </label>
-          <input type="text" id="brand" value={input.brand} onChange={handleChange}
+          <input
+            type="text"
+            id="brand"
+            value={input.brand}
+            onChange={handleChange}
             placeholder="Enter brand name"
-            className="bg-[#f8f9fa] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#014e4e] focus:border-[#014e4e] block w-full p-2.5 transition duration-200"/>
-          {errors?.brand && <p className="text-red-500 text-xs">{errors?.brand}</p>}
+            className="w-full bg-[#f8f9fa] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#014e4e] focus:border-[#014e4e] p-2.5 transition duration-200"
+          />
         </div>
 
-        <button type="submit"
-          className="w-full text-white bg-[#014e4e] hover:bg-[#016666] focus:ring-4 focus:outline-none focus:ring-[#7fc5c5] font-semibold rounded-lg text-sm px-5 py-2.5 text-center transition duration-200">
+        <button
+          type="submit"
+          className="w-full text-white bg-[#014e4e] hover:bg-[#016666] focus:ring-4 focus:outline-none focus:ring-[#7fc5c5] font-semibold rounded-lg text-sm px-5 py-2.5 text-center transition duration-200"
+        >
           Add Shoe
         </button>
 
         <p className="text-center text-sm text-gray-600 mt-4">
           Go back to{" "}
-          <span onClick={() => navigate("/")}
-            className="text-[#014e4e] hover:underline cursor-pointer font-medium">
+          <span
+            onClick={() => navigate("/")}
+            className="text-[#014e4e] hover:underline cursor-pointer font-medium"
+          >
             List Page
           </span>
         </p>
