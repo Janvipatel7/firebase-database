@@ -2,6 +2,7 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ShoeList = () => {
   const [shoes, setShoes] = useState([]);
@@ -28,6 +29,7 @@ const ShoeList = () => {
     try {
       await deleteDoc(doc(db, "shoes", id));
       displayShoes();
+      toast.success("Shoe Deleted successfully!");
     } catch (error) {
       console.log(error);
     }
