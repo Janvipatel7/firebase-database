@@ -26,17 +26,20 @@ const EditShoe = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
-        if (!input.name || !input.price || !input.brand) {
+        if (!input.name.trim() || !input.price || !input.brand.trim()) {
             toast.error("Enter all details correctly!");
+            setInput({ name: "", price: "", brand: "" });
             return;
         }
 
         try {
             await updateDoc(doc(db, "shoes", id), input);
             toast.success("Shoe updated successfully!");
+            setInput({ name: "", price: "", brand: "" });
             navigate("/");
         } catch (error) {
             toast.error("Error updating shoe: " + error.message);
+            setInput({ name: "", price: "", brand: "" });
         }
     };
 

@@ -17,21 +17,20 @@ const Login = () => {
 
     if (input.email.trim() === "" || input.password.trim() === "") {
       toast.error("Enter All Details Correctly!");
+      setInput({ email: "", password: "" });
       return;
     }
 
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        input.email,
-        input.password
-      );
+      const user = await signInWithEmailAndPassword( auth, input.email, input.password);
       if (user) {
         toast.success("Login successful!");
+        setInput({ email: "", password: "" });
         navigate("/");
       }
     } catch (error) {
       toast.error("Invalid credentials. Please try again.");
+      setInput({ email: "", password: "" });
     }
   };
 

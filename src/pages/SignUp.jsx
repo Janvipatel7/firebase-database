@@ -20,26 +20,20 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (
-            input.email.trim() === "" ||
-            input.password.trim() === "" ||
-            input.confirmPassword.trim() === ""
-        ) {
+        if ( input.email.trim() === "" || input.password.trim() === "" || input.confirmPassword.trim() === ""){
             toast.error("Enter all details correctly!");
+            setInput({ email: "", password: "" , confirmPassword: "",});
             return;
         }
 
         if (input.password !== input.confirmPassword) {
             toast.error("Passwords do not match!");
+            setInput({ email: "", password: "" , confirmPassword: "",});
             return;
         }
 
         try {
-            const res = await createUserWithEmailAndPassword(
-                auth,
-                input.email,
-                input.password
-            );
+            const res = await createUserWithEmailAndPassword( auth, input.email, input.password);
             if (res) {
                 toast.success("Account created successfully!");
                 setInput({ email: "", password: "", confirmPassword: "" });
@@ -47,6 +41,7 @@ const SignUp = () => {
             }
         } catch (error) {
             toast.error(error.message);
+            setInput({ email: "", password: "" , confirmPassword: "",});
         }
     };
 
